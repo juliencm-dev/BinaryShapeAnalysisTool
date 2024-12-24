@@ -54,26 +54,6 @@ class BinaryImageAnalyser:
     def __calc_area(self):
         return self.__image[self.__image == 0].size
 
-    # def __calc_perimeter(self):
-    #     core = self.__image[1:-1, 1:-1]
-    #     core_mask = np.logical_or(
-    #         np.logical_or(np.logical_and(core == 0, self.__image[0:-2, 1:-1] == 1), np.logical_and(core == 0, self.__image[2:, 1:-1] == 1)),
-    #         np.logical_or(np.logical_and(core == 0, self.__image[1:-1, 0:-2] == 1), np.logical_and(core == 0, self.__image[1:-1, 2:] == 1)))
-    #
-    #     perimeter_image = core_mask.astype(np.int8)
-    #
-    #     perimeter_image = np.pad(perimeter_image, 1, 'constant', constant_values=0)
-    #
-    #     core = perimeter_image[1:-1, 1:-1]
-    #     core_mask = np.logical_or(
-    #         np.logical_and(np.logical_and(core == 1, perimeter_image[0:-2, 1:-1] == 1), np.logical_and(core == 1, perimeter_image[2:, 1:-1] == 1)),
-    #         np.logical_and(np.logical_and(core == 1, perimeter_image[1:-1, 0:-2] == 1), np.logical_and(core == 1, perimeter_image[1:-1, 2:] == 1)))
-    #
-    #     diagonals = np.zeros(core_mask.shape, dtype=np.float32)
-    #     diagonals[core_mask] = np.sqrt(2)
-    #
-    #     return np.sum(diagonals) + np.sum(perimeter_image) - np.count_nonzero(diagonals)
-
     def __calc_perimeter(self):
         return np.sum(np.logical_or(
                     np.logical_or(np.logical_and(self.__image[1:-1, 1:-1] == 0, self.__image[0:-2, 1:-1] == 1), np.logical_and(self.__image[1:-1, 1:-1] == 0, self.__image[2:, 1:-1] == 1)),
